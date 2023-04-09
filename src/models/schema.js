@@ -44,7 +44,7 @@ export const schema = {
                     "type": {
                         "enum": "TransportationModes"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "createdAt": {
@@ -235,7 +235,7 @@ export const schema = {
                     "type": {
                         "enum": "OrderStatus"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "Restaurant": {
@@ -827,6 +827,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "adminSub": {
+                    "name": "adminSub",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "Dishes": {
                     "name": "Dishes",
                     "isArray": true,
@@ -842,13 +849,6 @@ export const schema = {
                             "restaurantID"
                         ]
                     }
-                },
-                "adminSub": {
-                    "name": "adminSub",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
                 },
                 "Baskets": {
                     "name": "Baskets",
@@ -931,6 +931,6 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "codegenVersion": "3.3.6",
-    "version": "a1f04e03c7025c7a131d0e5566ad4d4e"
+    "codegenVersion": "3.4.0",
+    "version": "426e1d217c565967e41e0319a878e8aa"
 };

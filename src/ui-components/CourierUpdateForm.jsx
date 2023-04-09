@@ -20,7 +20,7 @@ import { DataStore } from "aws-amplify";
 export default function CourierUpdateForm(props) {
   const {
     id: idProp,
-    courier,
+    courier: courierModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -34,7 +34,7 @@ export default function CourierUpdateForm(props) {
     sub: "",
     lat: "",
     lng: "",
-    transportationMode: undefined,
+    transportationMode: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [sub, setSub] = React.useState(initialValues.sub);
@@ -55,21 +55,23 @@ export default function CourierUpdateForm(props) {
     setTransportationMode(cleanValues.transportationMode);
     setErrors({});
   };
-  const [courierRecord, setCourierRecord] = React.useState(courier);
+  const [courierRecord, setCourierRecord] = React.useState(courierModelProp);
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp ? await DataStore.query(Courier, idProp) : courier;
+      const record = idProp
+        ? await DataStore.query(Courier, idProp)
+        : courierModelProp;
       setCourierRecord(record);
     };
     queryData();
-  }, [idProp, courier]);
+  }, [idProp, courierModelProp]);
   React.useEffect(resetStateValues, [courierRecord]);
   const validations = {
     name: [{ type: "Required" }],
     sub: [{ type: "Required" }],
     lat: [],
     lng: [],
-    transportationMode: [{ type: "Required" }],
+    transportationMode: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -320,7 +322,7 @@ export default function CourierUpdateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          isDisabled={!(idProp || courier)}
+          isDisabled={!(idProp || courierModelProp)}
           {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
@@ -332,7 +334,7 @@ export default function CourierUpdateForm(props) {
             type="submit"
             variation="primary"
             isDisabled={
-              !(idProp || courier) ||
+              !(idProp || courierModelProp) ||
               Object.values(errors).some((e) => e?.hasError)
             }
             {...getOverrideProps(overrides, "SubmitButton")}

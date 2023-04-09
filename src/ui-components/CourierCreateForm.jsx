@@ -33,7 +33,7 @@ export default function CourierCreateForm(props) {
     sub: "",
     lat: "",
     lng: "",
-    transportationMode: undefined,
+    transportationMode: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [sub, setSub] = React.useState(initialValues.sub);
@@ -56,7 +56,7 @@ export default function CourierCreateForm(props) {
     sub: [{ type: "Required" }],
     lat: [],
     lng: [],
-    transportationMode: [{ type: "Required" }],
+    transportationMode: [],
   };
   const runValidationTasks = async (
     fieldName,

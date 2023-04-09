@@ -9,7 +9,7 @@ type Courier @model @auth(rules: [{allow: public}]) {
   sub: String!
   lat: Float
   lng: Float
-  transportationMode: TransportationModes!
+  transportationMode: TransportationModes
 }
 
 enum OrderStatus {
@@ -34,7 +34,7 @@ type Order @model @auth(rules: [{allow: public}]) {
   userID: ID! @index(name: "byUser")
   total: Float!
   OrderDishes: [OrderDish] @hasMany(indexName: "byOrder", fields: ["id"])
-  status: OrderStatus!
+  status: OrderStatus
   Restaurant: Restaurant @hasOne
   Courier: Courier @hasOne
 }
@@ -84,8 +84,8 @@ type Restaurant @model @auth(rules: [{allow: public}]) {
   address: String!
   lat: Float!
   lng: Float!
-  Dishes: [Dish] @hasMany(indexName: "byRestaurant", fields: ["id"])
   adminSub: String
+  Dishes: [Dish] @hasMany(indexName: "byRestaurant", fields: ["id"])
   Baskets: [Basket] @hasMany(indexName: "byRestaurant", fields: ["id"])
 }
  

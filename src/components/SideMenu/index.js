@@ -1,7 +1,7 @@
-import { Menu } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Menu } from "antd";
+import { useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
-import { useRestaurantContext } from '../../contexts/RestaurantContext';
+import { useRestaurantContext } from "../../contexts/RestaurantContext";
 
 const SideMenu = () => {
   const navigate = useNavigate();
@@ -10,6 +10,7 @@ const SideMenu = () => {
   const onClick = async (menuItem) => {
     if (menuItem.key === "signOut") {
       await Auth.signOut();
+
       window.location.reload();
     } else {
       navigate(menuItem.key);
@@ -19,15 +20,15 @@ const SideMenu = () => {
   const mainMenuItems = [
     {
       key: "/",
-      label: 'Orders'
+      label: "Orders",
     },
     {
       key: "menu",
-      label: 'Menu'
+      label: "Menu",
     },
     {
       key: "order-history",
-      label: 'Order History'
+      label: "Order History",
     },
   ];
 
@@ -35,7 +36,7 @@ const SideMenu = () => {
     ...(restaurant ? mainMenuItems : []),
     {
       key: "settings",
-      label: 'Settings'
+      label: "Settings",
     },
     {
       key: "signOut",
@@ -43,10 +44,10 @@ const SideMenu = () => {
       danger: "true",
     },
   ];
-  
+
   return (
     <>
-      {restaurant && <h3>{restaurant.name}</h3>}
+      {restaurant && <h4>{restaurant.name}</h4>}
       <Menu items={menuItems} onClick={onClick} />
     </>
   );

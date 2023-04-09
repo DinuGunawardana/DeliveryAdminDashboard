@@ -1,9 +1,10 @@
+import '@azure/core-asynciterator-polyfill'
 import { Layout, Image } from "antd";
-import SideMenu from '../src/components/SideMenu';
+import SideMenu from "../src/components/SideMenu";
 import AppRoutes from "./components/AppRoutes";
 import { Amplify } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import awsconfig from './aws-exports';
+import awsconfig from "./aws-exports";
 import "@aws-amplify/ui-react/styles.css";
 import RestaurantContextProvider from "./contexts/RestaurantContext";
 
@@ -27,7 +28,7 @@ function App() {
             <AppRoutes />
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Restaurant Dashboard ©2023
+            Ali Eats Restaurant Dashboard ©2023
           </Footer>
         </Layout>
       </Layout>

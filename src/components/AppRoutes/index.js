@@ -2,7 +2,7 @@ import DetailedOrder from "../../modules/DetailedOrder";
 import Orders from "../../modules/Orders";
 import RestaurantMenu from "../../modules/RestaurantMenu";
 import CreateMenuItem from "../../modules/CreateMenuItem";
-import OrderHistory from "../../modules/OrderHisotry";
+import OrderHistory from "../../modules/OrderHistory";
 import Settings from "../../modules/Settings";
 import { Routes, Route } from "react-router-dom";
 

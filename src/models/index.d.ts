@@ -29,7 +29,7 @@ type EagerCourier = {
   readonly sub: string;
   readonly lat?: number | null;
   readonly lng?: number | null;
-  readonly transportationMode: TransportationModes | keyof typeof TransportationModes;
+  readonly transportationMode?: TransportationModes | keyof typeof TransportationModes | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -44,7 +44,7 @@ type LazyCourier = {
   readonly sub: string;
   readonly lat?: number | null;
   readonly lng?: number | null;
-  readonly transportationMode: TransportationModes | keyof typeof TransportationModes;
+  readonly transportationMode?: TransportationModes | keyof typeof TransportationModes | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -98,7 +98,7 @@ type EagerOrder = {
   readonly userID: string;
   readonly total: number;
   readonly OrderDishes?: (OrderDish | null)[] | null;
-  readonly status: OrderStatus | keyof typeof OrderStatus;
+  readonly status?: OrderStatus | keyof typeof OrderStatus | null;
   readonly Restaurant?: Restaurant | null;
   readonly Courier?: Courier | null;
   readonly createdAt?: string | null;
@@ -116,7 +116,7 @@ type LazyOrder = {
   readonly userID: string;
   readonly total: number;
   readonly OrderDishes: AsyncCollection<OrderDish>;
-  readonly status: OrderStatus | keyof typeof OrderStatus;
+  readonly status?: OrderStatus | keyof typeof OrderStatus | null;
   readonly Restaurant: AsyncItem<Restaurant | undefined>;
   readonly Courier: AsyncItem<Courier | undefined>;
   readonly createdAt?: string | null;
@@ -288,8 +288,8 @@ type EagerRestaurant = {
   readonly address: string;
   readonly lat: number;
   readonly lng: number;
-  readonly Dishes?: (Dish | null)[] | null;
   readonly adminSub?: string | null;
+  readonly Dishes?: (Dish | null)[] | null;
   readonly Baskets?: (Basket | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -310,8 +310,8 @@ type LazyRestaurant = {
   readonly address: string;
   readonly lat: number;
   readonly lng: number;
-  readonly Dishes: AsyncCollection<Dish>;
   readonly adminSub?: string | null;
+  readonly Dishes: AsyncCollection<Dish>;
   readonly Baskets: AsyncCollection<Basket>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

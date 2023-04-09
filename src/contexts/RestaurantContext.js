@@ -13,10 +13,7 @@ const RestaurantContextProvider = ({ children }) => {
     Auth.currentAuthenticatedUser({ bypassCache: true }).then(setUser);
   }, []);
 
-  // console.log(user);
-
   useEffect(() => {
-    //this triggers after Auth retrieves the user
     if (!sub) {
       return;
     }
@@ -26,8 +23,7 @@ const RestaurantContextProvider = ({ children }) => {
     );
   }, [sub]);
 
-  //  console.log(sub);
-  // console.log(restaurant);
+  console.log(restaurant?.id);
 
   return (
     <RestaurantContext.Provider value={{ restaurant, setRestaurant, sub }}>
