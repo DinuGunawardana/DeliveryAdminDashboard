@@ -1,30 +1,26 @@
 import { useState, useEffect } from "react";
 import { Card, Table, Tag } from "antd";
-import { useRestaurantContext } from "../../contexts/RestaurantContext";
 import { DataStore } from "aws-amplify";
 import { Order, OrderStatus } from "../../models";
 import { useNavigate } from "react-router-dom";
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
-  const { restaurant } = useRestaurantContext();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!restaurant) {
-      return;
-    }
-    DataStore.query(Order, (order) =>
-      order
-        .orderRestaurantId.eq(restaurant.id)
+    DataStore.query(Order, (o) => o.or(o => [
+      o.status.eq("PICKED_UP"),
+      o.status.eq("COMPLETED"),
+      o.status.eq("DECLINED_BY_RESTAURANT") ])
         // .or(orderStatus => [ 
         //   orderStatus.status.eq("PICKED_UP"),
         //   orderStatus.status.eq("COMPLETED"),
         //   orderStatus.status.eq("DECLINED_BY_RESTAURANT")
         // ])
     ).then(setOrders);
-  }, [restaurant]);
+  }, []);
 
   const renderOrderStatus = (orderStatus) => {
     const statusToColor = {

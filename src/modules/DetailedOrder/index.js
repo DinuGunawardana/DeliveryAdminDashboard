@@ -2,7 +2,7 @@ import { Card, Descriptions, Divider, List, Button, Tag, Spin } from "antd";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DataStore } from "aws-amplify";
-import { Order, OrderDish, OrderStatus, User } from "../../models";
+import { Order, OrderDish, OrderStatus, Restaurant, User } from "../../models";
 
 const statusToColor = {
   [OrderStatus.NEW]: "green",
@@ -15,6 +15,7 @@ const DetailedOrder = () => {
   const { id } = useParams();
   const [order, setOrder] = useState(null);
   const [customer, setCustomer] = useState(null);
+  const [res, setRes] = useState(null);
   const [dishes, setDishes] = useState([]);
 
   useEffect(() => {
@@ -26,6 +27,12 @@ const DetailedOrder = () => {
       DataStore.query(User, order.userID).then(setCustomer);
     }
   }, [order?.userID]);
+
+  useEffect(() => {
+    if (order?.orderRestaurantId) {
+      DataStore.query(Restaurant, order.orderRestaurantId).then(setRes);
+    }
+  }, [order?.orderRestaurantId]);
 
   useEffect(() => {
     if (!order?.id) {
@@ -69,6 +76,9 @@ const DetailedOrder = () => {
         <Descriptions.Item label="Customer">{customer?.name}</Descriptions.Item>
         <Descriptions.Item label="Customer Address">
           {customer?.address}
+        </Descriptions.Item>
+        <Descriptions.Item label="Restaurant">
+          {res?.name}
         </Descriptions.Item>
       </Descriptions>
       <Divider />

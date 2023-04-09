@@ -13,22 +13,15 @@ const Orders = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!restaurant) {
-      return;
-    }
-    DataStore.query(Order, (order) => order.orderRestaurantId.eq(restaurant.id)
-    // .or((orderStatus) => [
-    //       orderStatus
-    //         .status.eq("NEW")
-    //         .status.eq("COOKING")
-    //         .status.eq("ACCEPTED")
-    //         .status.eq("READY_FOR_PICKUP")
-    // ])
-    ).then(setOrders);
-  }, [restaurant]);
+    DataStore.query(Order, (o) => o.or(o => [
+      o.status.eq("NEW"),
+      o.status.eq("COOKING"),
+      o.status.eq("ACCEPTED"),
+      o.status.eq("READY_FOR_PICKUP")
+    ])).then(setOrders);
+  }, []);
 
   
-
   useEffect(() => {
     const subscription = DataStore.observe(Order).subscribe((msg) => {
       const { opType, element } = msg;
